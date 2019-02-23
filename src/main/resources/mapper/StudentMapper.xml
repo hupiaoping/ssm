@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ilovestudy.dao.StudentMapper">
+
+    <insert id="insertStudent" parameterType="student">
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into student(number,name,age) values(#{number},#{name},#{age})
+    </insert>
+
+    <select id="select" parameterType="student" resultType="student">
+        select * from student
+        <where>
+            <if test="id != null">
+                id=#{id}
+            </if>
+            
+            <if test="number != null and number != ''">
+                and number like concat('%',#{number},'%')
+            </if>
+
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+
+            <if test="age != null">
+                and age=#{age}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAll" resultType="student">
+        select * from student
+    </select>
+
+</mapper>
