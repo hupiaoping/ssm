@@ -14,9 +14,9 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!--scan service-->
-    <context:component-scan base-package="com.ilovestudy.service.serviceImpl"></context:component-scan>
-    <!--
-    <bean id="studentService" class="com.ilovestudy.service.serviceImpl.StudentServiceImpl"></bean>
-    -->
+<!--scan service-->
+<context:component-scan base-package="com.ilovestudy.service.serviceImpl"></context:component-scan>
+<!--
+<bean id="studentService" class="com.ilovestudy.service.serviceImpl.StudentServiceImpl"></bean>
+-->
 </beans>

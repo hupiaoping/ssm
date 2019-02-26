@@ -14,34 +14,13 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!--static resources-->
-    <mvc:default-servlet-handler></mvc:default-servlet-handler>
-
-    <!--开启注解，配置json转换器-->
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
-
-    <!--scan handler-->
-    <context:component-scan base-package="com.ilovestudy.controller"></context:component-scan>
-
-    <!--view resolver-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/view/"></property>
-        <property name="suffix" value=".jsp"></property>
-    </bean>
-
     <bean id="myAspect" class="com.ilovestudy.common.aspect.MyAspect"></bean>
 
-    <!--controller是springmvc容器中的，所以要对controller进行aop，配置应该在springmvc的配置文件中-->
+    <!--service是spring容器中的，所以要对service进行aop，配置应该在spring的配置文件中-->
     <aop:config proxy-target-class="true">
         <aop:aspect ref="myAspect">
-            <aop:pointcut id="myPointCut" expression="execution(* com.ilovestudy.controller.*.*(..))"></aop:pointcut>
+            <aop:pointcut id="myPointCut" expression="execution(* com.ilovestudy.service.*.*(..))"></aop:pointcut>
             <aop:before method="beforeExecution" pointcut-ref="myPointCut"></aop:before>
         </aop:aspect>
     </aop:config>
-
 </beans>
